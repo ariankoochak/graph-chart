@@ -19,3 +19,40 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+* {
+  box-sizing: border-box;
+}
+
+
+
+/* ---------------------------------------------CUSTOM STYLES------------------------------------------ */
+
+section{
+  width: calc(100vw - 4rem); /* 2rem*2 for padding 2rem in line:35 */
+  height: 100vh;
+  display: flex;
+  padding: 2rem;
+  gap: 2rem;
+  background-color: black;
+}
+
+section div{
+  background-color: #3f3f3f;
+  border-radius: 12px;
+}
+
+
+.csv-management-container{
+  flex: 0 0 20%;
+}
+
+.graph-chart-container{
+  flex: 0 0 60%;
+}
+
+.node-details{
+  flex: 0 0 20%;
+}
+
+/* ---------------------------------------------------------------------------------------------------- */
