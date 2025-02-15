@@ -1,0 +1,93 @@
+@font-face {
+	font-family: IRANSansX;
+	font-style: normal;
+	font-weight: 100;
+	src: url('../app/fonts/IranSansX/woff/IRANSansX-Thin.woff') format('woff'),   
+	url('../app/fonts/IranSansX/woff2/IRANSansX-Thin.woff2') format('woff2');		
+}
+
+@font-face {
+	font-family: IRANSansX;
+	font-style: normal;
+	font-weight: 200;
+	src: url('../app/fonts/IranSansX/woff/IRANSansX-UltraLight.woff') format('woff'),   
+	url('../app/fonts/IranSansX/woff2/IRANSansX-UltraLight.woff2') format('woff2');	
+}
+
+@font-face {
+	font-family: IRANSansX;
+	font-style: normal;
+	font-weight: 300;
+	src: url('../app/fonts/IranSansX/woff/IRANSansX-Light.woff') format('woff'),   
+	url('../app/fonts/IranSansX/woff2/IRANSansX-Light.woff2') format('woff2');		 
+}
+
+@font-face {
+	font-family: IRANSansX;
+	font-style: normal;
+	font-weight: 500;
+	src: url('../app/fonts/IranSansX/woff/IRANSansX-Medium.woff') format('woff'),   
+	url('../app/fonts/IranSansX/woff2/IRANSansX-Medium.woff2') format('woff2');		 
+}
+
+@font-face {
+	font-family: IRANSansX;
+	font-style: normal;
+	font-weight: 600;
+	src: url('../app/fonts/IranSansX/woff/IRANSansX-DemiBold.woff') format('woff'),   
+	url('../app/fonts/IranSansX/woff2/IRANSansX-DemiBold.woff2') format('woff2');	 
+}
+
+@font-face {
+	font-family: IRANSansX;
+	font-style: normal;
+	font-weight: 800;
+	src: url('../app/fonts/IranSansX/woff/IRANSansX-ExtraBold.woff') format('woff'),   
+	url('../app/fonts/IranSansX/woff2/IRANSansX-ExtraBold.woff2') format('woff2');		 
+}
+
+@font-face {
+	font-family: IRANSansX;
+	font-style: normal;
+	font-weight: 900;
+	src: url('../app/fonts/IranSansX/woff/IRANSansX-Black.woff') format('woff'),   
+	url('../app/fonts/IranSansX/woff2/IRANSansX-Black.woff2') format('woff2');		 
+}
+
+@font-face {
+	font-family: IRANSansX;
+	font-style: normal;
+	font-weight: 950;
+	src: url('../app/fonts/IranSansX/woff/IRANSansX-ExtraBlack.woff') format('woff'),   
+	url('../app/fonts/IranSansX/woff2/IRANSansX-ExtraBlack.woff2') format('woff2');		 
+}
+
+@font-face {
+	font-family: IRANSansX;
+	font-style: normal;
+	font-weight: 1000;
+	src: url('../app/fonts/IranSansX/woff/IRANSansX-Heavy.woff') format('woff'),   
+	url('../app/fonts/IranSansX/woff2/IRANSansX-Heavy.woff2') format('woff2');		 
+}
+
+@font-face {
+	font-family: IRANSansX;
+	font-style: normal;
+	font-weight: bold;
+	src: url('../app/fonts/IranSansX/woff/IRANSansX-Bold.woff') format('woff'),   
+	url('../app/fonts/IranSansX/woff2/IRANSansX-Bold.woff2') format('woff2');	 
+}
+
+@font-face {
+	font-family: IRANSansX;
+	font-style: normal;
+	font-weight: normal;
+	src: url('../app/fonts/IranSansX/woff/IRANSansX-Regular.woff') format('woff'),   
+	url('../app/fonts/IranSansX/woff2/IRANSansX-Regular.woff2') format('woff2');	
+}
+
+.persian-number {
+    -moz-font-feature-settings: "ss01";
+    -webkit-font-feature-settings: "ss01";
+    font-feature-settings: "ss01";
+}
