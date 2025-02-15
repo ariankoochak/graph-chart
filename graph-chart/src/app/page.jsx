@@ -1,10 +1,16 @@
+'use client'
+
+import GetCsv from '@/components/GetCsv/GetCsv'
 import React from 'react'
 
-export default function page() {
+export default function MainPage() {
+  
   return (
     <section>
       <div className="csv-management-container">
-        <button className='upload-csv-btn'>Upload CSV File</button>
+        <GetCsv onGetCsv={(csv)=>{
+          console.log(csv);
+        }}/>
       </div>
       <div className="graph-chart-container"></div>
       <div className="node-details"></div>
