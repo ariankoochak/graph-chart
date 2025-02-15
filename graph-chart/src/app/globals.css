@@ -24,6 +24,23 @@ body {
   box-sizing: border-box;
 }
 
+/* ---------------------------------------------GLOBAL STYLES------------------------------------------ */
+
+button{
+  background-color: white;
+  color: black;
+  border-radius: 8px;
+  padding: 12px;
+  transition: all .2s;
+}
+
+button:hover{
+  transition: all .2s;
+  background-color: #d1d1d1;
+  color: black;
+}
+
+/* ---------------------------------------------------------------------------------------------------- */
 
 
 /* ---------------------------------------------CUSTOM STYLES------------------------------------------ */
@@ -53,6 +70,11 @@ section div{
 
 .node-details{
   flex: 0 0 20%;
+}
+
+.upload-csv-btn{
+  margin: 12px;
+  width: calc(100% - 24px);/* 24px*2 for margin 12px in line:69 */
 }
 
 /* ---------------------------------------------------------------------------------------------------- */
