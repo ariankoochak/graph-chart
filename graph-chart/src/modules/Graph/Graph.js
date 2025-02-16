@@ -54,6 +54,7 @@ class Graph {
         for (const node of this.#nodes) {
             nodes.push({ id: node.label, color: node.color });
         }
+        return nodes;
     }
 
     /**
