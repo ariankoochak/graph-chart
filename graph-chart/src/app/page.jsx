@@ -11,13 +11,18 @@ export default function MainPage() {
     setCsv(csv);
   }
 
+  const handleNodeClicked = (nodeId)=>{
+    console.log(nodeId);
+    
+  }
+
   return (
     <section>
       <div className="csv-management-container">
         <GetCsv onGetCsv={handlePrepareCsv}/>
       </div>
       <div className="graph-chart-container">
-        <Chart csv={csv}/>
+        <Chart csv={csv} onNodeClicked={handleNodeClicked}/>
       </div>
       <div className="node-details"></div>
     </section>
