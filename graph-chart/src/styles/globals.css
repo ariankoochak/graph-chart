@@ -80,6 +80,17 @@ button:hover{
   direction: rtl;
 }
 
+.warning{
+  display: inline-block;
+  margin: 8px 0;
+  font-size: 12px;
+  color: #ffd643;
+  padding: 8px;
+  width: 100%;
+  text-align: center;
+  direction: rtl;
+}
+
 /* ---------------------------------------------------------------------------------------------------- */
 
 
