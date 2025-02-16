@@ -1,12 +1,10 @@
 "use client";
 
 import prepareGraphForHighCharts from "@/actions/prepareGraphForHighCharts";
-import dynamic from "next/dynamic";
-import { startTransition, useActionState, useEffect, useState } from "react";
 
-const HighchartsReact = dynamic(() => import("highcharts-react-official"), {
-    ssr: false,
-});
+import { startTransition, useActionState, useEffect, useState } from "react";
+import DrawGraph from "../DrawGraph/DrawGraph";
+
 
 export default function Chart({ csv }) {
     const [warning, setWarning] = useState("");
@@ -133,6 +131,5 @@ export default function Chart({ csv }) {
     if (err !== "") return <span className="error">{err}</span>;
     if (warning !== "") return <span className="warning">{warning}</span>;
     if (isPending) return <span className="success">در حال بارگذاری...</span>;
-
-    return <HighchartsReact highcharts={Highcharts} options={options} />;
+    if (graph) return <DrawGraph graph={graph}/>;
 }
