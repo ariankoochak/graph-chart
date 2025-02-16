@@ -47,26 +47,26 @@ class Graph {
 
     /**
      * get nodes for use in highcharts data
-     * @returns Array [{id : (node label) , color : (hex)},...]
+     * @returns Array [{name : (node id) , itemStyle : {color: (hex) } },...]
      */
     getNodes() {
         const nodes = [];
         for (const node of this.#nodes) {
-            nodes.push({ id: node.label, color: node.color });
+            nodes.push({ name: node.id, itemStyle: { color: node.color } });
         }
         return nodes;
     }
 
     /**
      * get edge for use in highcharts data
-     * @returns Array [[source edge name , target edge name],...]
+     * @returns Array [{ source: edge source name , target: edge target name },...]
      */
     getEdge() {
         const fromTo = [];
 
         for (const edge of this.#edges) {
             console.log(edge);
-            fromTo.push([edge.source, edge.target]);
+            fromTo.push({ source: edge.source, target: edge.target });
         }
         return fromTo;
     }
