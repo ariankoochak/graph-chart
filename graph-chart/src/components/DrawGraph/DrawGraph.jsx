@@ -65,6 +65,8 @@ export default function DrawGraph({ graph }) {
                 chart: {
                     type: "networkgraph",
                     marginTop: 80,
+                    animation : false,
+                    shadow : false,
                     zoomType: "xy",
                     height: "96.5%",
                     events: {
@@ -79,7 +81,8 @@ export default function DrawGraph({ graph }) {
                         //     }
                         // },
                         load: function () {
-                            addNodesAndEdgesInBatches();
+                            console.log('finish load!');
+                            
                         }
                     },
                 },
@@ -106,8 +109,8 @@ export default function DrawGraph({ graph }) {
                             linkFormat: "",
                             allowOverlap: true,
                         },
-                        data: [],
-                        nodes: [],
+                        data: graph.edges,
+                        nodes: graph.nodes,
                     },
                 ],
             });
@@ -168,64 +171,9 @@ export default function DrawGraph({ graph }) {
 
 
 
-
-    const addNodesAndEdgesInBatches = () => {
-            let index = 0;
-
-            const interval = setInterval(() => {
-                if(chartRef.current){
-                    const chart = chartRef.current.chart;
-                    const batchSize = 50;
-
-                    console.log(index);
-
-                    if (index >= graph.nodes.length) {
-                        clearInterval(interval);
-                        return;
-                    }
-
-                    // گرفتن بخشی از نودها و یال‌ها
-                    const newNodes = graph.nodes.slice(
-                        index,
-                        index + batchSize
-                    );
-                    const newEdges = graph.edges.slice(
-                        index,
-                        index + batchSize
-                    );
-
-                    // اضافه کردن نودها
-                    const updatedNodes = [
-                        ...chart.series[0].options.nodes,
-                        ...newNodes,
-                    ];
-                    // const updatedEdges = [
-                    //     ...chart.series[0].options.data,
-                    //     ...newEdges,
-                    // ];
-
-                    // 🔥 اینجا باید `update()` استفاده بشه تا Highcharts متوجه تغییرات بشه
-                    chart.series[0].update(
-                        {
-                            nodes: updatedNodes,
-                            // data: updatedEdges,
-                        },
-                        true // 🔥 باعث میشه فقط همین سری آپدیت بشه نه کل گراف
-                    );
-
-                    index += batchSize;
-                }
-
-            }, 300); // هر ۳۰۰ میلی‌ثانیه ۵۰۰۰ نود اضافه کن
-    };
-
-    addNodesAndEdgesInBatches();
+    // addNodesAndEdgesInBatches();
     
     return (<>
-    {console.log(chartRef)}
-    {`% ${progress}`}
-    {`nodes :  ${loadIndex}`}
-
     <HighchartsReact ref={chartRef} highcharts={Highcharts} options={options} />
     </>);
 }
