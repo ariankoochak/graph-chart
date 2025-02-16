@@ -5,13 +5,8 @@ import { useEffect, useRef } from "react";
 
 import * as echarts from "echarts";
 
-export default function DrawGraph({ graph }) {
+export default function DrawGraph({ graph,onNodeClick }) {
     const chartRef = useRef(null);
-
-
-    console.log('edges',graph.edges);
-    console.log('nodes',graph.nodes);
-    
     
     useEffect(() => {
         const chartInstance = echarts.init(chartRef.current, null, {
@@ -37,8 +32,7 @@ export default function DrawGraph({ graph }) {
 
         chartInstance.on("click", function (params) {
             if (params.dataType === "node") {
-                alert(`Clicked on: ${params.data.name}`);
-                console.log("Node Data:", params.data);
+                onNodeClick(params.data.name);
             }
         });
 
