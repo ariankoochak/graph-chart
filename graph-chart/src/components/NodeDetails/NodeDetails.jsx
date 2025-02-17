@@ -4,6 +4,7 @@ import getNodeByNodeId from "@/actions/getNodeByNodeId";
 import { useEffect, startTransition, useState, useActionState } from "react";
 import { useSelector } from "react-redux";
 import RenderNodeConnections from "./RenderNodeConnections";
+import SeparatorLine from "../SeparatorLine/SeparatorLine";
 
 export default function NodeDetails() {
     const [err, setErr] = useState("");
@@ -36,6 +37,7 @@ export default function NodeDetails() {
             <div className="node-id">ID: {nodeData.id}</div>
             <div className="node-label">Label : {nodeData.label}</div>
             <div className="node-color">Color : {nodeData.color}</div>
+            <SeparatorLine/>
             <div className="node-connections-container">
                 <RenderNodeConnections connections={nodeData.connections} nodeId={nodeId}/>
             </div>
