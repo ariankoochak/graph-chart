@@ -29,7 +29,7 @@ export default function RenderNodeConnections({
                         }
                         style={
                             nodeId === connection.source
-                                ? { background: selectedNodeColor }
+                                ? { background: selectedNodeColor, cursor:'default' }
                                 : {}
                         }
                     >
@@ -43,7 +43,7 @@ export default function RenderNodeConnections({
                         }
                         style={
                             nodeId === connection.target
-                                ? { background: selectedNodeColor }
+                                ? { background: selectedNodeColor , cursor:'default'}
                                 : {}
                         }
                     >
