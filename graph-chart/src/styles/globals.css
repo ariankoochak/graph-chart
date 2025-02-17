@@ -91,6 +91,15 @@ button:hover{
   direction: rtl;
 }
 
+.separator-line{
+  display: inline-block;
+  margin: 0 auto;
+  width: 90%;
+  height: 1px;
+  border-radius: 100px;
+  background-color: #717171;
+}
+
 /* ---------------------------------------------------------------------------------------------------- */
 
 
@@ -128,6 +137,18 @@ section div{
   display: inline-block;
   text-align: center;
   width: calc(100% - 24px);/* 24px*2 for margin 12px in line:69 */
+}
+
+.node-datas{
+  padding: 12px;
+}
+
+.node-datas div{
+  margin: 8px 0;
+}
+
+.node-datas .node-connections-container .connection button{
+  padding: 6px !important;
 }
 
 /* ---------------------------------------------------------------------------------------------------- */
