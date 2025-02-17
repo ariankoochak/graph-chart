@@ -15,7 +15,7 @@ export default function ChangeColorInput({ nodeId, nodeColor }) {
 
     const handleChangeAllSameNodeColor = () => {
         dispatch(
-            addChangeNodeViewRequest({ nodeId, newColor: color, newIcon: "" ,isAllSameColorNode : true})
+            addChangeNodeViewRequest({ nodeId, newColor: color, newIcon: "" ,isAllSameColorNode : true,oldColor : nodeColor})
         );
     };
 

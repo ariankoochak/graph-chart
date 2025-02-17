@@ -52,14 +52,31 @@ export default function DrawGraph({ graph }) {
 
     useEffect(()=>{
         if(Object.keys(editRequest).length > 0){
-            const { nodeId, newColor ,newIcon} = editRequest;
+            const { nodeId, newColor ,newIcon , isAllSameColorNode,oldColor} = editRequest;
 
-            if (nodeId && newColor) {
+            if (newColor) {
                 let updatedNodes = chartInstance.current
                     .getOption()
                     .series[0].data.map((node) => {
-                        if (node.name === nodeId) {
-                            return { ...node, itemStyle: { color: newColor } };
+                        if(isAllSameColorNode){
+                            
+                            if (node.itemStyle.color === oldColor) {
+                                console.log(node);
+                                dispatch(addChangeNodeViewToChangeHistory({nodeId : node.name,newColor,newIcon}));
+                                return {
+                                    ...node,
+                                    itemStyle: { color: newColor },
+                                };
+                            }
+                        }
+                        else{
+                            if (node.name === nodeId) {
+                                dispatch(addChangeNodeViewToChangeHistory({nodeId,newColor,newIcon}));
+                                return {
+                                    ...node,
+                                    itemStyle: { color: newColor },
+                                };
+                            }
                         }
                         return node;
                     });
@@ -70,7 +87,6 @@ export default function DrawGraph({ graph }) {
                     },
                     { notMerge: false }
                 );
-                dispatch(addChangeNodeViewToChangeHistory({nodeId,newColor,newIcon}));
             }
         }
     },[editRequest])
