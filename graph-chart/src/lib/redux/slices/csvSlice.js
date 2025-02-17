@@ -8,7 +8,7 @@ export const csvSlice = createSlice({
     name: "csvSlice",
     initialState,
     reducers: {
-        addCsvDatas: (state, action) => {    // Test Function
+        addCsvDatas: (state, action) => {
             state.csvDatas = [...action.payload];
         },
     },

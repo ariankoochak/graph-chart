@@ -2,8 +2,12 @@
 
 import { useEffect, useState } from "react";
 import Papa from "papaparse";
+import { useDispatch } from "react-redux";
+import { addCsvDatas } from "@/lib/redux/slices/csvSlice";
 
-export default function GetCsv({onGetCsv}) {
+export default function GetCsv() {
+    const dispatch = useDispatch();
+
     const [err,setErr] = useState('');
     const [successMessage,setSuccessMessage] = useState('');
         
@@ -21,7 +25,7 @@ export default function GetCsv({onGetCsv}) {
                     header: true,
                     skipEmptyLines: true,
                     complete: (result) => {
-                        onGetCsv(result.data);
+                        dispatch(addCsvDatas(result.data))
                         setSuccessMessage('فایل با موفقیت بارگذاری شد')
                         setErr('')
                     },

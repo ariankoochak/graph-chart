@@ -4,9 +4,12 @@ import prepareGraphForHighCharts from "@/actions/prepareGraphForHighCharts";
 
 import { startTransition, useActionState, useEffect, useState } from "react";
 import DrawGraph from "../DrawGraph/DrawGraph";
+import { useSelector } from "react-redux";
 
 
-export default function Chart({ csv , onNodeClicked}) {
+export default function Chart({onNodeClicked}) {
+    const csv = useSelector((state) => state.csvSlice.csvDatas); 
+
     const [warning, setWarning] = useState("");
     const [err, setErr] = useState("");
 
