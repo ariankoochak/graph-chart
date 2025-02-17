@@ -38,8 +38,11 @@ export default function NodeDetails() {
         console.log(changeNodeViewHistory);
         
         for (const row of changeNodeViewHistory) {
-            if (row.nodeId === nodeId) {
-                return reqView === 'color' ? row.newColor : row.newIcon;
+            if (row.nodeId === nodeId ) {
+                if (reqView === "color" && row.newColor !== undefined)
+                    return row.newColor;
+                if (reqView === "icon" && row.newIcon !== "")
+                    return row.newIcon
             }
         }
         return reqView === "color" ? nodeData.color : nodeData.icon;

@@ -2,27 +2,28 @@
 
 import { useEffect, useRef } from "react";
 
-
 import * as echarts from "echarts";
 import { useDispatch, useSelector } from "react-redux";
 import { clickNode } from "@/lib/redux/slices/selectedNodeSlice";
 import { addChangeNodeViewToChangeHistory } from "@/lib/redux/slices/editGraphSlice";
 
 export default function DrawGraph({ graph }) {
-    const editRequest = useSelector((state) => state.editGraphSlice.changeNodeViewRequest); 
-    
+    const editRequest = useSelector(
+        (state) => state.editGraphSlice.changeNodeViewRequest
+    );
+
     const dispatch = useDispatch();
 
     const chartRef = useRef(null);
-    const chartInstance = useRef(null); 
-    
+    const chartInstance = useRef(null);
+
     useEffect(() => {
         if (!chartRef.current) return;
 
         chartInstance.current = echarts.init(chartRef.current, null, {
             renderer: "canvas",
         });
-        
+
         const option = {
             title: { text: "" },
             animation: false,
@@ -30,7 +31,7 @@ export default function DrawGraph({ graph }) {
                 {
                     type: "graph",
                     layout: "force",
-                    force: { repulsion: 100},
+                    force: { repulsion: 100 },
                     roam: true,
                     data: graph.nodes,
                     links: graph.edges,
@@ -49,29 +50,39 @@ export default function DrawGraph({ graph }) {
         return () => chartInstance.current.dispose();
     }, []);
 
-
-    useEffect(()=>{
-        if(Object.keys(editRequest).length > 0){
-            const { nodeId, newColor ,newIcon , isAllSameColorNode,oldColor} = editRequest;
+    useEffect(() => {
+        if (Object.keys(editRequest).length > 0) {
+            const { nodeId, newColor, newIcon, isAllSameColorNode, oldColor } =
+                editRequest;
 
             if (newColor) {
                 let updatedNodes = chartInstance.current
                     .getOption()
                     .series[0].data.map((node) => {
-                        if(isAllSameColorNode){
-                            
+                        if (isAllSameColorNode) {
                             if (node.itemStyle.color === oldColor) {
                                 console.log(node);
-                                dispatch(addChangeNodeViewToChangeHistory({nodeId : node.name,newColor,newIcon}));
+                                dispatch(
+                                    addChangeNodeViewToChangeHistory({
+                                        nodeId: node.name,
+                                        newColor,
+                                        newIcon,
+                                    })
+                                );
                                 return {
                                     ...node,
                                     itemStyle: { color: newColor },
                                 };
                             }
-                        }
-                        else{
+                        } else {
                             if (node.name === nodeId) {
-                                dispatch(addChangeNodeViewToChangeHistory({nodeId,newColor,newIcon}));
+                                dispatch(
+                                    addChangeNodeViewToChangeHistory({
+                                        nodeId,
+                                        newColor,
+                                        newIcon,
+                                    })
+                                );
                                 return {
                                     ...node,
                                     itemStyle: { color: newColor },
@@ -87,9 +98,41 @@ export default function DrawGraph({ graph }) {
                     },
                     { notMerge: false }
                 );
+            } else if (newIcon) {
+                let updatedNodes = chartInstance.current
+                    .getOption()
+                    .series[0].data.map((node) => {
+                        if (node.name === nodeId) {
+                            dispatch(
+                                addChangeNodeViewToChangeHistory({
+                                    nodeId,
+                                    newColor,
+                                    newIcon,
+                                })
+                            );
+                            return {
+                                ...node,
+                                symbol: `image:///icons/${newIcon}`,
+                            };
+                        }
+
+                        return node;
+                    });
+
+                chartInstance.current.setOption(
+                    {
+                        series: [{ data: updatedNodes }],
+                    },
+                    { notMerge: false }
+                );
             }
         }
-    },[editRequest])
+    }, [editRequest]);
 
-    return <div ref={chartRef} style={{ width: "100%", height: "93vh",borderRadius: '12px'}} />;
+    return (
+        <div
+            ref={chartRef}
+            style={{ width: "100%", height: "93vh", borderRadius: "12px" }}
+        />
+    );
 }
