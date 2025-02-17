@@ -3,6 +3,7 @@
 import getNodeByNodeId from "@/actions/getNodeByNodeId";
 import { useEffect, startTransition, useState, useActionState } from "react";
 import { useSelector } from "react-redux";
+import RenderNodeConnections from "./RenderNodeConnections";
 
 export default function NodeDetails() {
     const [err, setErr] = useState("");
@@ -32,11 +33,12 @@ export default function NodeDetails() {
     else if (isPending) return <span className="success">در حال بارگذاری...</span>
     else if(nodeData) return (
         <div className="node-datas">
-            {console.log(nodeData.connections)}
             <div className="node-id">ID: {nodeData.id}</div>
             <div className="node-label">Label : {nodeData.label}</div>
             <div className="node-color">Color : {nodeData.color}</div>
-            <div className="node-connections-container"></div>
+            <div className="node-connections-container">
+                <RenderNodeConnections connections={nodeData.connections} nodeId={nodeId}/>
+            </div>
         </div>
     );
 }
