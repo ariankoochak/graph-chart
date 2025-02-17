@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Papa from "papaparse";
 import { useDispatch } from "react-redux";
 import { addCsvDatas } from "@/lib/redux/slices/csvSlice";
+import ExportCsv from "./ExportCsv";
 
 export default function GetCsv() {
     const dispatch = useDispatch();
@@ -59,6 +60,7 @@ export default function GetCsv() {
                 style={{ display: "none" }}
                 onChange={handleGetCsvFile}
             />
+            <ExportCsv/>
             {err && <span className="error">{err}</span>}
             {successMessage && <span className="success">{successMessage}</span>}
         </>

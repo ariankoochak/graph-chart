@@ -13,6 +13,7 @@
     "echarts": "^5.6.0",
     "highcharts": "^12.1.2",
     "highcharts-react-official": "^3.2.1",
+    "json2csv": "^6.0.0-alpha.2",
     "next": "15.1.7",
     "papaparse": "^5.5.2",
     "react": "^19.0.0",

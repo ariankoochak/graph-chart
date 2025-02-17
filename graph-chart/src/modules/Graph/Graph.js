@@ -1,5 +1,9 @@
 import AppError from "@/modules/AppError/AppError";
 
+import { Parser } from "json2csv";
+import fs from "fs";
+import path from "path";
+
 class Graph {
     #mainGraph = [];
     #nodes = [];
@@ -133,6 +137,43 @@ class Graph {
         }
 
         return connections;
+    }
+
+    generateCsvDatas(editGraphRows){
+        for(let i = 0;i < this.#mainGraph;i++){
+            console.log(this.#mainGraph[i]);
+            
+            if(this.#mainGraph[i].type === 'edge'){
+                break;
+            }
+
+            for(const editedNode of editGraphRows){
+                if (editedNode.nodeId === this.#mainGraph[i].id) {
+                    if (editedNode.newIcon !== '')
+                        this.#mainGraph[i].icon = editedNode.newIcon;
+                    if(editedNode.newColor !== undefined)
+                        this.#mainGraph[i].color = editedNode.newColor;
+                }
+            }
+        }
+        return this.#mainGraph
+    }
+
+    generateCsvFile(data){
+        try {
+            const fileName = Date.now()+'.csv'
+            const fields = Object.keys(data[0]); 
+            const json2csvParser = new Parser({ fields });
+            const csv = json2csvParser.parse(data);
+
+            const filePath = path.join(process.cwd(), "public", fileName);
+            fs.writeFileSync(filePath, csv); 
+
+            return "/"+fileName;
+        } catch (error) {
+            console.error("Error generating CSV:", error);
+            return null;
+        }
     }
 }
 
