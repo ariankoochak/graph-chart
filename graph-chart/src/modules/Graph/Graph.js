@@ -37,7 +37,7 @@ class Graph {
 
     #prepareLastNodeIndex() {
         for (let i = 0; i < this.#mainGraph.length; i++) {
-            console.log("finding last node...", this.#mainGraph[i]);
+            // console.log("finding last node...", this.#mainGraph[i]);
             if (this.#mainGraph[i].type !== "node") {
                 this.#lastNodeIndex = --i;
                 break;
@@ -65,7 +65,7 @@ class Graph {
         const fromTo = [];
 
         for (const edge of this.#edges) {
-            console.log(edge);
+            // console.log(edge);
             fromTo.push({ source: edge.source, target: edge.target });
         }
         return fromTo;
@@ -80,6 +80,54 @@ class Graph {
             nodes: this.getNodes(),
             edges: this.getEdge(),
         };
+    }
+
+    /**
+     *
+     * @param {string} nodeId node id
+     * @returns {object} node data - if not found node returns {}
+     * @throws {Error} if nodeId not defined , throw Error
+     */
+    getNode(nodeId) {        
+        if (!nodeId) {
+            throw new AppError("node id not passed!", 412);
+        }
+        
+        for (const node of this.#nodes) {
+            if (node.id == nodeId) {
+                const nodeConnections = this.#getNodeConnections(nodeId);
+                console.log("nodeConnections", nodeConnections);
+                
+                return { ...node ,connections : nodeConnections};
+            }
+        }
+
+        return {};
+    }
+
+    /**
+     *
+     * @param {string} nodeId node id
+     * @returns {Array} node connections - if not found any connection returns []
+     * @throws {Error} if nodeId not defined , throw Error
+     */
+    #getNodeConnections(nodeId) {
+        if (!nodeId) {
+            throw new AppError("node id not passed!", 412);
+        }
+        
+        const connections = [];
+        for(const edge of this.#edges){
+            if(edge.target == nodeId || edge.source == nodeId){
+                connections.push({
+                    source: edge.source,
+                    target: edge.target,
+                    weight: edge.weight,
+                });
+            }
+        }
+
+        return connections;
     }
 }
 
