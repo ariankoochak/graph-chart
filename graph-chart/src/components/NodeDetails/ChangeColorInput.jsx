@@ -10,7 +10,13 @@ export default function ChangeColorInput({ nodeId, nodeColor }) {
     const [color, setColor] = useState(nodeColor);
 
     const handleChangeThisNodeColor = () => {
-        dispatch(addChangeNodeViewRequest({nodeId,newColor : color , newIcon : ''}))
+        dispatch(addChangeNodeViewRequest({nodeId,newColor : color , newIcon : '',isAllSameColorNode : false}))
+    };
+
+    const handleChangeAllSameNodeColor = () => {
+        dispatch(
+            addChangeNodeViewRequest({ nodeId, newColor: color, newIcon: "" ,isAllSameColorNode : true})
+        );
     };
 
     useEffect(()=>{        
@@ -26,7 +32,7 @@ export default function ChangeColorInput({ nodeId, nodeColor }) {
             <button onClick={handleChangeThisNodeColor}>
                 تغییر رنگ همین گره
             </button>
-            <button>تغییر رنگ تمام گره های همرنگ</button>
+            <button onClick={handleChangeAllSameNodeColor}>تغییر رنگ تمام گره های همرنگ</button>
         </div>
     );
 }
