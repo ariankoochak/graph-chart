@@ -151,4 +151,8 @@ section div{
   padding: 6px !important;
 }
 
+.node-datas .node-connections-container .connection .opened-node{
+  color: white !important;
+}
+
 /* ---------------------------------------------------------------------------------------------------- */

@@ -39,7 +39,7 @@ export default function NodeDetails() {
             <div className="node-color">Color : {nodeData.color}</div>
             <SeparatorLine/>
             <div className="node-connections-container">
-                <RenderNodeConnections connections={nodeData.connections} nodeId={nodeId}/>
+                <RenderNodeConnections connections={nodeData.connections} nodeId={nodeId} selectedNodeColor={nodeData.color}/>
             </div>
         </div>
     );
