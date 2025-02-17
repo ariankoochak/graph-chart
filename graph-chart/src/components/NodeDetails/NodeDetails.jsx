@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import RenderNodeConnections from "./RenderNodeConnections";
 import SeparatorLine from "../SeparatorLine/SeparatorLine";
 import ChangeColorInput from "./ChangeColorInput";
+import ChangeIconInput from "./ChangeIconInput";
 
 export default function NodeDetails() {
     const [err, setErr] = useState("");
@@ -72,6 +73,9 @@ export default function NodeDetails() {
                     />
                 </div>
                 <SeparatorLine />
+                <div className="change-icon-container">
+                    <ChangeIconInput nodeId={nodeId} nodeIconSrc={getNodeView('icon')} nodeColor={getNodeView('color')}/>
+                </div>
             </div>
         );
 }

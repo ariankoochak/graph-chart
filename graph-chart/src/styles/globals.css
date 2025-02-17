@@ -201,4 +201,24 @@ section div{
   margin: 6px 0;
 }
 
+.node-datas .change-icon-input-container .icons-list{
+  width: 100%;
+  text-align: center;
+}
+
+.node-datas .change-icon-input-container .icons-list img{
+  display: inline-block;
+  border-radius: 4px;
+  cursor: pointer;
+    width: 40px;
+    height: 40px;
+    margin: 4px;
+    background-color: white;
+    padding: 4px;
+}
+
+.node-datas .change-icon-input-container .icons-list img:hover{
+  background-color: #717171 !important;
+}
+
 /* ---------------------------------------------------------------------------------------------------- */
