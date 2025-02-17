@@ -5,12 +5,9 @@ import GetCsv from "@/components/GetCsv/GetCsv";
 
 import { Provider } from "react-redux";
 import { store } from "@/lib/redux/store";
+import NodeDetails from "@/components/NodeDetails/NodeDetails";
 
 export default function MainPage() {
-    const handleNodeClicked = (nodeId) => {
-        console.log(nodeId);
-    };
-
     return (
         <Provider store={store}>
             <section>
@@ -18,9 +15,11 @@ export default function MainPage() {
                     <GetCsv/>
                 </div>
                 <div className="graph-chart-container">
-                    <Chart onNodeClicked={handleNodeClicked} />
+                    <Chart/>
                 </div>
-                <div className="node-details"></div>
+                <div className="node-details">
+                    <NodeDetails/>
+                </div>
             </section>
         </Provider>
     );

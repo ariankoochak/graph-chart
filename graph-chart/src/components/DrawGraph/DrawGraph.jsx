@@ -4,8 +4,12 @@ import { useEffect, useRef } from "react";
 
 
 import * as echarts from "echarts";
+import { useDispatch } from "react-redux";
+import { clickNode } from "@/lib/redux/slices/selectedNodeSlice";
 
-export default function DrawGraph({ graph,onNodeClick }) {
+export default function DrawGraph({ graph }) {
+    const dispatch = useDispatch();
+
     const chartRef = useRef(null);
     
     useEffect(() => {
@@ -32,7 +36,7 @@ export default function DrawGraph({ graph,onNodeClick }) {
 
         chartInstance.on("click", function (params) {
             if (params.dataType === "node") {
-                onNodeClick(params.data.name);
+                dispatch(clickNode(params.data.name));
             }
         });
 

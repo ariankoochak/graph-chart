@@ -7,7 +7,7 @@ import DrawGraph from "../DrawGraph/DrawGraph";
 import { useSelector } from "react-redux";
 
 
-export default function Chart({onNodeClicked}) {
+export default function Chart() {
     const csv = useSelector((state) => state.csvSlice.csvDatas); 
 
     const [warning, setWarning] = useState("");
@@ -45,5 +45,5 @@ export default function Chart({onNodeClicked}) {
     if (err !== "") return <span className="error">{err}</span>;
     if (warning !== "") return <span className="warning">{warning}</span>;
     if (isPending) return <span className="success">در حال بارگذاری...</span>;
-    if (graph) return <DrawGraph graph={graph} onNodeClick={onNodeClicked}/>;
+    if (graph) return <DrawGraph graph={graph}/>;
 }
