@@ -52,7 +52,12 @@ class Graph {
     getNodes() {
         const nodes = [];
         for (const node of this.#nodes) {
-            nodes.push({ name: node.id, itemStyle: { color: node.color } });
+            nodes.push({
+                name: node.id,
+                itemStyle: { color: node.color },
+                symbol: node.icon ? `image:///icons/${node.icon}` : "",
+                symbolSize: 20,
+            });
         }
         return nodes;
     }
