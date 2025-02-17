@@ -5,6 +5,7 @@ import { useEffect, startTransition, useState, useActionState } from "react";
 import { useSelector } from "react-redux";
 import RenderNodeConnections from "./RenderNodeConnections";
 import SeparatorLine from "../SeparatorLine/SeparatorLine";
+import ChangeColorInput from "./ChangeColorInput";
 
 export default function NodeDetails() {
     const [err, setErr] = useState("");
@@ -14,15 +15,17 @@ export default function NodeDetails() {
     );
     const csv = useSelector((state) => state.csvSlice.csvDatas);
 
-    const [nodeData, formAction, isPending] = useActionState(
-        getNodeByNodeId
+    const changeNodeViewHistory = useSelector(
+        (state) => state.editGraphSlice.ChangesHistory
     );
+
+    const [nodeData, formAction, isPending] = useActionState(getNodeByNodeId);
 
     useEffect(() => {
         try {
             if (csv.length > 0 && nodeId !== "") {
                 startTransition(() => {
-                    formAction({csv, nodeId});
+                    formAction({ csv, nodeId });
                 });
             }
         } catch (error) {
@@ -30,17 +33,45 @@ export default function NodeDetails() {
         }
     }, [nodeId]);
 
+    const getNodeView = (reqView)=>{
+        console.log(changeNodeViewHistory);
+        
+        for (const row of changeNodeViewHistory) {
+            if (row.nodeId === nodeId) {
+                return reqView === 'color' ? row.newColor : row.newIcon;
+            }
+        }
+        return reqView === "color" ? nodeData.color : nodeData.icon;
+    }
+
     if (nodeId === "") return <></>;
-    else if (isPending) return <span className="success">در حال بارگذاری...</span>
-    else if(nodeData) return (
-        <div className="node-datas">
-            <div className="node-id">ID: {nodeData.id}</div>
-            <div className="node-label">Label : {nodeData.label}</div>
-            <div className="node-color">Color : {nodeData.color}</div>
-            <SeparatorLine/>
-            <div className="node-connections-container">
-                <RenderNodeConnections connections={nodeData.connections} nodeId={nodeId} selectedNodeColor={nodeData.color}/>
+    else if (isPending)
+        return <span className="success">در حال بارگذاری...</span>;
+    else if (nodeData)
+        return (
+            <div className="node-datas">
+                <div
+                    className="node-color"
+                    style={{ background: getNodeView('color')}}
+                />
+                <div className="node-id">ID: {nodeData.id}</div>
+                <div className="node-label">Label : {nodeData.label}</div>
+                <SeparatorLine />
+                <div className="node-connections-container">
+                    <RenderNodeConnections
+                        connections={nodeData.connections}
+                        nodeId={nodeId}
+                        selectedNodeColor={getNodeView('color')}
+                    />
+                </div>
+                <SeparatorLine />
+                <div className="change-color-input-container">
+                    <ChangeColorInput
+                        nodeId={nodeId}
+                        nodeColor={getNodeView('color')}
+                    />
+                </div>
+                <SeparatorLine />
             </div>
-        </div>
-    );
+        );
 }

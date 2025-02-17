@@ -4,16 +4,22 @@ import { useEffect, useRef } from "react";
 
 
 import * as echarts from "echarts";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { clickNode } from "@/lib/redux/slices/selectedNodeSlice";
+import { addChangeNodeViewToChangeHistory } from "@/lib/redux/slices/editGraphSlice";
 
 export default function DrawGraph({ graph }) {
+    const editRequest = useSelector((state) => state.editGraphSlice.changeNodeViewRequest); 
+    
     const dispatch = useDispatch();
 
     const chartRef = useRef(null);
+    const chartInstance = useRef(null); 
     
     useEffect(() => {
-        const chartInstance = echarts.init(chartRef.current, null, {
+        if (!chartRef.current) return;
+
+        chartInstance.current = echarts.init(chartRef.current, null, {
             renderer: "canvas",
         });
         
@@ -32,16 +38,42 @@ export default function DrawGraph({ graph }) {
             ],
         };
 
-        chartInstance.setOption(option);
-
-        chartInstance.on("click", function (params) {
+        chartInstance.current.on("click", function (params) {
             if (params.dataType === "node") {
                 dispatch(clickNode(params.data.name));
             }
         });
 
-        return () => chartInstance.dispose();
+        chartInstance.current.setOption(option);
+
+        return () => chartInstance.current.dispose();
     }, []);
+
+
+    useEffect(()=>{
+        if(Object.keys(editRequest).length > 0){
+            const { nodeId, newColor ,newIcon} = editRequest;
+
+            if (nodeId && newColor) {
+                let updatedNodes = chartInstance.current
+                    .getOption()
+                    .series[0].data.map((node) => {
+                        if (node.name === nodeId) {
+                            return { ...node, itemStyle: { color: newColor } };
+                        }
+                        return node;
+                    });
+
+                chartInstance.current.setOption(
+                    {
+                        series: [{ data: updatedNodes }],
+                    },
+                    { notMerge: false }
+                );
+                dispatch(addChangeNodeViewToChangeHistory({nodeId,newColor,newIcon}));
+            }
+        }
+    },[editRequest])
 
     return <div ref={chartRef} style={{ width: "100%", height: "93vh",borderRadius: '12px'}} />;
 }
