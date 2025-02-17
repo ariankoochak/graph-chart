@@ -53,5 +53,8 @@ export default function RenderNodeConnections({
             );
         });
     };
-    return <div className="connection-container">{render()}</div>;
+    if(connections.length === 0)
+        return <span className="error">هیچ یالی وجود ندارد</span>
+    else
+        return <div className="connection-container">{render()}</div>;
 }
