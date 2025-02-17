@@ -5,6 +5,7 @@ import Papa from "papaparse";
 import { useDispatch } from "react-redux";
 import { addCsvDatas } from "@/lib/redux/slices/csvSlice";
 import ExportCsv from "./ExportCsv";
+import { clickNode } from "@/lib/redux/slices/selectedNodeSlice";
 
 export default function GetCsv() {
     const dispatch = useDispatch();
@@ -28,6 +29,7 @@ export default function GetCsv() {
                     complete: (result) => {
                         dispatch(addCsvDatas(result.data))
                         setSuccessMessage('فایل با موفقیت بارگذاری شد')
+                        dispatch(clickNode(''));
                         setErr('')
                     },
                 });
