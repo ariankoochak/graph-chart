@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import graphSlice from "./slices/graphSlice";
+import csvSlice from "./slices/csvSlice";
 
 export const store = configureStore({
     reducer: {
-        graphSlice: graphSlice,
+        csvSlice: csvSlice,
     },
 });
